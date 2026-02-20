@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-midnight text-white font-body;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-brand-500 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-midnight;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-700 rounded-full;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-body font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/30 hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 border border-brand-500 text-brand-400 hover:bg-brand-600 hover:text-white font-body font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  .card-glass {
+    @apply bg-card/80 backdrop-blur-sm border border-white/5 rounded-2xl;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-300 via-purple-300 to-blue-300 bg-clip-text text-transparent;
+  }
+}
+
+/* Animated node canvas background */
+.node-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.node {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(128,84,248,0.6), transparent 70%);
+  animation: nodeDrift var(--duration, 20s) var(--delay, 0s) ease-in-out infinite alternate;
+}
+
+@keyframes nodeDrift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  50% { transform: translate(var(--tx, 40px), var(--ty, -30px)) scale(1.2); opacity: 0.5; }
+  100% { transform: translate(var(--tx2, -20px), var(--ty2, 50px)) scale(0.9); opacity: 0.25; }
+}
+
+/* Connection lines SVG animation */
+.connection-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 3s ease forwards;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(128, 84, 248, 0.2);
+}
+
+/* Input focus glow */
+input:focus, textarea:focus {
+  box-shadow: 0 0 0 3px rgba(128, 84, 248, 0.2);
+}
